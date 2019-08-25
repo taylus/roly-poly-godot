@@ -14,16 +14,16 @@
 [ext_resource path="res://gfx/slime_idle_1.png" type="Texture" id=12]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=13]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 72, 8 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 6 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8, 128 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 88, 8 )
 
 [node name="Main" type="Node2D"]
@@ -39,7 +39,7 @@ region_rect = Rect2( 0, 0, 144, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Base Floor/StaticBody2D"]
 position = Vector2( 72, 8 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Second Floor" type="Sprite" parent="."]
 editor/display_folded = true
@@ -156,7 +156,6 @@ texture = ExtResource( 10 )
 centered = false
 
 [node name="Player" type="KinematicBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 72, 234 )
 script = ExtResource( 11 )
 
@@ -170,21 +169,21 @@ script = ExtResource( 13 )
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Bounding Walls" type="StaticBody2D" parent="."]
 
 [node name="Left Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( -8, 128 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Right Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( 152, 128 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Top Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( 72, -8 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 [connection signal="timeout" from="Conveyor Belt 1/Animation Timer" to="Conveyor Belt 1" method="_on_Animation_Timer_timeout"]
 [connection signal="timeout" from="Conveyor Belt 2/Animation Timer" to="Conveyor Belt 2" method="_on_Animation_Timer_timeout"]
 [connection signal="timeout" from="Player/Sprite/Animation Timer" to="Player/Sprite" method="_on_Animation_Timer_timeout"]
