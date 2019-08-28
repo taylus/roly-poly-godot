@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://gfx/slime_idle_1.png" type="Texture" id=2]
@@ -15,25 +15,34 @@
 [ext_resource path="res://gfx/cake.png" type="Texture" id=13]
 [ext_resource path="res://gfx/green_beans.png" type="Texture" id=14]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 72, 8 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 24, 8 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 24, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 4, 24 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4, 8 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 64 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 4, 8 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 8, 128 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 88, 8 )
 
 [node name="Main" type="Node2D"]
@@ -53,7 +62,7 @@ script = ExtResource( 3 )
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Floors" type="Node" parent="."]
 
@@ -69,7 +78,7 @@ region_rect = Rect2( 0, 0, 144, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Base Floor/StaticBody2D"]
 position = Vector2( 72, 8 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Second Floor" type="Sprite" parent="Floors"]
 position = Vector2( 0, 192 )
@@ -88,10 +97,9 @@ position = Vector2( -32, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Second Floor/StaticBody2D2"]
 position = Vector2( 72, 8 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="Third Floor" type="Sprite" parent="Floors"]
-editor/display_folded = true
 position = Vector2( 80, 112 )
 texture = ExtResource( 4 )
 centered = false
@@ -103,6 +111,12 @@ position = Vector2( 16, 16 )
 rotation = 3.14159
 texture = ExtResource( 5 )
 centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Floors/Third Floor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Third Floor/StaticBody2D"]
+position = Vector2( 24, 8 )
+shape = SubResource( 10 )
 
 [node name="Conveyors" type="Node" parent="."]
 editor/display_folded = true
@@ -161,7 +175,7 @@ script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladders/Ladder 1/OnLadderArea"]
 position = Vector2( 0, 1 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="AboveLadderArea" type="Area2D" parent="Ladders/Ladder 1" groups=[
 "above_ladders",
@@ -170,7 +184,7 @@ position = Vector2( 4, -7 )
 script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladders/Ladder 1/AboveLadderArea"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="Ladder 2" type="Sprite" parent="Ladders"]
 position = Vector2( 128, 112 )
@@ -178,6 +192,25 @@ texture = ExtResource( 9 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 128 )
+
+[node name="OnLadderArea" type="Area2D" parent="Ladders/Ladder 2" groups=[
+"ladders",
+]]
+position = Vector2( 12, 64 )
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladders/Ladder 2/OnLadderArea"]
+position = Vector2( 0, 1 )
+shape = SubResource( 6 )
+
+[node name="AboveLadderArea" type="Area2D" parent="Ladders/Ladder 2" groups=[
+"above_ladders",
+]]
+position = Vector2( 12, -7 )
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladders/Ladder 2/AboveLadderArea"]
+shape = SubResource( 7 )
 
 [node name="Pipes" type="Node" parent="."]
 editor/display_folded = true
@@ -226,15 +259,16 @@ editor/display_folded = true
 
 [node name="Left Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( -8, 128 )
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="Right Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( 152, 128 )
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="Top Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( 72, -8 )
-shape = SubResource( 4 )
+shape = SubResource( 9 )
+
 [connection signal="timeout" from="Player/Sprite/Animation Timer" to="Player/Sprite" method="_on_Animation_Timer_timeout"]
 [connection signal="timeout" from="Conveyors/Conveyor Belt 1/Animation Timer" to="Conveyors/Conveyor Belt 1" method="_on_Animation_Timer_timeout"]
 [connection signal="timeout" from="Conveyors/Conveyor Belt 2/Animation Timer" to="Conveyors/Conveyor Belt 2" method="_on_Animation_Timer_timeout"]
@@ -242,3 +276,7 @@ shape = SubResource( 4 )
 [connection signal="body_exited" from="Ladders/Ladder 1/OnLadderArea" to="Ladders/Ladder 1/OnLadderArea" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Ladders/Ladder 1/AboveLadderArea" to="Ladders/Ladder 1/AboveLadderArea" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Ladders/Ladder 1/AboveLadderArea" to="Ladders/Ladder 1/AboveLadderArea" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Ladders/Ladder 2/OnLadderArea" to="Ladders/Ladder 2/OnLadderArea" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Ladders/Ladder 2/OnLadderArea" to="Ladders/Ladder 2/OnLadderArea" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Ladders/Ladder 2/AboveLadderArea" to="Ladders/Ladder 2/AboveLadderArea" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Ladders/Ladder 2/AboveLadderArea" to="Ladders/Ladder 2/AboveLadderArea" method="_on_Area2D_body_exited"]
