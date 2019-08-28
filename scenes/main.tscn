@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://gfx/slime_idle_1.png" type="Texture" id=2]
@@ -13,7 +13,8 @@
 [ext_resource path="res://gfx/pipe.png" type="Texture" id=11]
 [ext_resource path="res://gfx/pipe_mouth.png" type="Texture" id=12]
 [ext_resource path="res://gfx/cake.png" type="Texture" id=13]
-[ext_resource path="res://gfx/green_beans.png" type="Texture" id=14]
+[ext_resource path="res://scripts/Food.gd" type="Script" id=14]
+[ext_resource path="res://gfx/green_beans.png" type="Texture" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )
@@ -24,25 +25,31 @@ extents = Vector2( 72, 8 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 24, 8 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 24, 8 )
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 4, 24 )
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 24, 8 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 4, 8 )
+extents = Vector2( 4, 24 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 4, 64 )
-
-[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 4, 8 )
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 4, 64 )
+
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 8, 128 )
+extents = Vector2( 4, 8 )
 
 [sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 8, 128 )
+
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 88, 8 )
 
 [node name="Main" type="Node2D"]
@@ -116,13 +123,11 @@ centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Third Floor/StaticBody2D"]
 position = Vector2( 24, 8 )
-shape = SubResource( 10 )
+shape = SubResource( 4 )
 
 [node name="Conveyors" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Conveyor Belt 1" type="Sprite" parent="Conveyors"]
-editor/display_folded = true
 position = Vector2( 0, 144 )
 texture = ExtResource( 6 )
 centered = false
@@ -138,6 +143,12 @@ centered = false
 [node name="Animation Timer" type="Timer" parent="Conveyors/Conveyor Belt 1"]
 wait_time = 0.5
 autostart = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Conveyors/Conveyor Belt 1"]
+position = Vector2( 24, 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyors/Conveyor Belt 1/StaticBody2D"]
+shape = SubResource( 12 )
 
 [node name="Conveyor Belt 2" type="Sprite" parent="Conveyors"]
 editor/display_folded = true
@@ -175,7 +186,7 @@ script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladders/Ladder 1/OnLadderArea"]
 position = Vector2( 0, 1 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="AboveLadderArea" type="Area2D" parent="Ladders/Ladder 1" groups=[
 "above_ladders",
@@ -184,7 +195,7 @@ position = Vector2( 4, -7 )
 script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladders/Ladder 1/AboveLadderArea"]
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Ladder 2" type="Sprite" parent="Ladders"]
 position = Vector2( 128, 112 )
@@ -201,7 +212,7 @@ script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladders/Ladder 2/OnLadderArea"]
 position = Vector2( 0, 1 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="AboveLadderArea" type="Area2D" parent="Ladders/Ladder 2" groups=[
 "above_ladders",
@@ -210,7 +221,7 @@ position = Vector2( 12, -7 )
 script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladders/Ladder 2/AboveLadderArea"]
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="Pipes" type="Node" parent="."]
 editor/display_folded = true
@@ -243,31 +254,36 @@ texture = ExtResource( 12 )
 centered = false
 
 [node name="Food" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Cake" type="Sprite" parent="Food"]
 position = Vector2( 80, 96 )
 texture = ExtResource( 13 )
 centered = false
 
-[node name="Green Beans" type="Sprite" parent="Food"]
-position = Vector2( 56, 184 )
-texture = ExtResource( 14 )
+[node name="Green Beans" type="RigidBody2D" parent="."]
+position = Vector2( 24, 16 )
+script = ExtResource( 14 )
+
+[node name="Sprite" type="Sprite" parent="Green Beans"]
+texture = ExtResource( 15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Green Beans"]
+shape = SubResource( 9 )
 
 [node name="Bounding Walls" type="StaticBody2D" parent="."]
 editor/display_folded = true
 
 [node name="Left Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( -8, 128 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="Right Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( 152, 128 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="Top Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( 72, -8 )
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 
 [connection signal="timeout" from="Player/Sprite/Animation Timer" to="Player/Sprite" method="_on_Animation_Timer_timeout"]
 [connection signal="timeout" from="Conveyors/Conveyor Belt 1/Animation Timer" to="Conveyors/Conveyor Belt 1" method="_on_Animation_Timer_timeout"]
@@ -280,3 +296,4 @@ shape = SubResource( 9 )
 [connection signal="body_exited" from="Ladders/Ladder 2/OnLadderArea" to="Ladders/Ladder 2/OnLadderArea" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Ladders/Ladder 2/AboveLadderArea" to="Ladders/Ladder 2/AboveLadderArea" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Ladders/Ladder 2/AboveLadderArea" to="Ladders/Ladder 2/AboveLadderArea" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Green Beans" to="Green Beans" method="_on_Green_Beans_body_entered"]
