@@ -9,7 +9,12 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "RigidBody2D",
+"base": "Sprite",
+"class": "ConveyorBelt",
+"language": "GDScript",
+"path": "res://scripts/ConveyorBelt.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Food",
 "language": "GDScript",
 "path": "res://scripts/Food.gd"
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://scripts/PlayerMovement.gd"
 } ]
 _global_script_class_icons={
+"ConveyorBelt": "",
 "Food": "",
 "PlayerBody2D": ""
 }
