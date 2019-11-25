@@ -55,7 +55,7 @@ A simple level with two pipes + conveyor belts on a single level. This level is 
 `TODO: graphic`
 
 ## Level 2
-This level introduces ladders and multiple floors, making it so it isn't always east to get to food on time before it expires.
+This level introduces ladders and multiple floors, showing that it isn't always easy to get to food on time before it expires.
 
 `TODO: graphic`
 
