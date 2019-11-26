@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://gfx/slime_idle_neutral_1.png" type="Texture" id=2]
@@ -10,11 +10,11 @@
 [ext_resource path="res://gfx/conveyor_belt_end.png" type="Texture" id=8]
 [ext_resource path="res://gfx/ladder.png" type="Texture" id=9]
 [ext_resource path="res://scripts/Ladder.gd" type="Script" id=10]
-[ext_resource path="res://gfx/pipe.png" type="Texture" id=11]
-[ext_resource path="res://gfx/pipe_mouth.png" type="Texture" id=12]
+[ext_resource path="res://scenes/food.tscn" type="PackedScene" id=11]
+[ext_resource path="res://gfx/green_beans.png" type="Texture" id=12]
 [ext_resource path="res://gfx/cake.png" type="Texture" id=13]
-[ext_resource path="res://scripts/Food.gd" type="Script" id=14]
-[ext_resource path="res://gfx/green_beans.png" type="Texture" id=15]
+[ext_resource path="res://gfx/pipe.png" type="Texture" id=14]
+[ext_resource path="res://gfx/pipe_mouth.png" type="Texture" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )
@@ -48,12 +48,6 @@ extents = Vector2( 4, 64 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 4, 8 )
-
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 8, 8 )
-
-[sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 8, 8 )
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 8, 128 )
@@ -246,55 +240,47 @@ script = ExtResource( 10 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladders/Ladder 2/AboveLadderArea"]
 shape = SubResource( 11 )
 
+[node name="Food" type="Node" parent="."]
+
+[node name="Green Beans" parent="Food" instance=ExtResource( 11 )]
+position = Vector2( 24, 16 )
+texture = ExtResource( 12 )
+score = -5
+
+[node name="Cake" parent="Food" instance=ExtResource( 11 )]
+position = Vector2( 120, 0 )
+tasty = true
+texture = ExtResource( 13 )
+score = 10
+
 [node name="Pipes" type="Node" parent="."]
 
-[node name="Pipe" type="Sprite" parent="Pipes"]
+[node name="Pipe 1" type="Sprite" parent="Pipes"]
+editor/display_folded = true
 position = Vector2( 8, 0 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 11 )
+texture = ExtResource( 14 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 32 )
 
-[node name="Mouth" type="Sprite" parent="Pipes/Pipe"]
+[node name="Mouth" type="Sprite" parent="Pipes/Pipe 1"]
 position = Vector2( 0, 32 )
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 centered = false
 
 [node name="Pipe 2" type="Sprite" parent="Pipes"]
 editor/display_folded = true
 position = Vector2( 104, 0 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 11 )
+texture = ExtResource( 14 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="Mouth" type="Sprite" parent="Pipes/Pipe 2"]
-texture = ExtResource( 12 )
-centered = false
-
-[node name="Food" type="Node" parent="."]
-
-[node name="Cake" type="Sprite" parent="Food"]
-position = Vector2( 80, 96 )
-texture = ExtResource( 13 )
-centered = false
-
-[node name="Green Beans" type="KinematicBody2D" parent="."]
-position = Vector2( 24, 16 )
-script = ExtResource( 14 )
-
-[node name="Sprite" type="Sprite" parent="Green Beans"]
 texture = ExtResource( 15 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Green Beans"]
-shape = SubResource( 12 )
-
-[node name="PlayerHitDetectionArea" type="Area2D" parent="Green Beans"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Green Beans/PlayerHitDetectionArea"]
-shape = SubResource( 13 )
+centered = false
 
 [node name="Bounding Walls" type="StaticBody2D" parent="."]
 editor/display_folded = true
@@ -323,4 +309,3 @@ shape = SubResource( 15 )
 [connection signal="body_exited" from="Ladders/Ladder 2/OnLadderArea" to="Ladders/Ladder 2/OnLadderArea" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Ladders/Ladder 2/AboveLadderArea" to="Ladders/Ladder 2/AboveLadderArea" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Ladders/Ladder 2/AboveLadderArea" to="Ladders/Ladder 2/AboveLadderArea" method="_on_Area2D_body_exited"]
-[connection signal="area_entered" from="Green Beans/PlayerHitDetectionArea" to="Green Beans" method="_on_PlayerHitDetectionArea_area_entered"]
