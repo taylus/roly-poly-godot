@@ -19,7 +19,7 @@ func _fall_with_gravity(gravity: Vector2 = Vector2(0, 1)):
 # will make catching food right off the conveyor look cute
 
 func _on_PlayerHitDetectionArea_area_entered(area: Area2D):
-	print("Food \"%s\" _on_body_entered w/ %s \"%s\"" % [name, str(area), area.name])
+	print("Food \"%s\" collided w/ %s \"%s\"" % [name, str(area), area.name])
 	if not area.is_in_group("player"): return
 	var player = _try_get_player_from(area)
 	if player: player.set_mood_for(Player.Mood.HAPPY if tasty else Player.Mood.SAD, 1.5)

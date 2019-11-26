@@ -28,10 +28,10 @@ func _on_Animation_Timer_timeout():
 # move certain objects that enter the conveyor belt's detection area
 func _on_PushArea_body_entered(body: PhysicsBody2D):
 	if body is StaticBody2D: return
-	print("Conveyor _on_PushArea_body_entered w/ %s \"%s\"" % [str(body), body.name])
+	print("Conveyor push area entered by %s \"%s\"" % [str(body), body.name])
 	if body is KinematicBody2D: bodiesToMove.append(body)
 
 func _on_PushArea_body_exited(body):
 	if body is StaticBody2D: return
-	print("Conveyor _on_PushArea_body_exited w/ %s \"%s\"" % [str(body), body.name])
+	print("Conveyor push area exited by %s \"%s\"" % [str(body), body.name])
 	if body is KinematicBody2D: bodiesToMove.erase(body)
