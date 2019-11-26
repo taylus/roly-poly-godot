@@ -16,8 +16,12 @@ func _fall_with_gravity(gravity: Vector2 = Vector2(0, 1)):
 func _on_PlayerHitDetectionArea_area_entered(area: Area2D):
 	print("Food _on_body_entered w/ %s \"%s\"" % [str(area), area.name])
 	if not area.is_in_group("player"): return
-	queue_free()
-	# TODO: do fancier stuff than just deleting the food:
+	var player = _try_get_player_from(area)
+	if player: player.set_mood_for(Player.Mood.HAPPY if tasty else Player.Mood.SAD, 1.5)
+	# TODO: do additional stuff after eating the food:
 	#       * play sound based on food type
-	#       * animate player based on food type
 	#       * adjust score based on food type
+	queue_free()
+	
+func _try_get_player_from(area: Area2D) -> Node:
+	return area.get_parent().find_node("Sprite")
