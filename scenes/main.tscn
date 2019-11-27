@@ -49,10 +49,10 @@ extents = Vector2( 4, 64 )
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 4, 8 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 8, 128 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 88, 8 )
 
 [node name="Main" type="Node2D"]
@@ -302,15 +302,15 @@ centered = false
 
 [node name="Left Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( -8, 128 )
-shape = SubResource( 14 )
+shape = SubResource( 12 )
 
 [node name="Right Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( 152, 128 )
-shape = SubResource( 14 )
+shape = SubResource( 12 )
 
 [node name="Top Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( 72, -8 )
-shape = SubResource( 15 )
+shape = SubResource( 13 )
 disabled = true
 [connection signal="timeout" from="Player/Sprite/Idle Animation Timer" to="Player/Sprite" method="_on_Idle_Animation_Timer_timeout"]
 [connection signal="timeout" from="Conveyors/Conveyor Belt 1/Animation Timer" to="Conveyors/Conveyor Belt 1" method="_on_Animation_Timer_timeout"]
