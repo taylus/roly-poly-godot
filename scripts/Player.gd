@@ -28,6 +28,7 @@ var idle_frames = {
 onready var idle_anim_timer: Timer = $"Idle Animation Timer"
 
 func set_mood(mood: String) -> void:
+	#print("Setting player mood to \"%s\"" % mood)
 	currentMood = mood
 	_update_texture_based_on_mood()
 	
