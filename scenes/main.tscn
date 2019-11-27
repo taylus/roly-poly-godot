@@ -10,11 +10,11 @@
 [ext_resource path="res://gfx/conveyor_belt_end.png" type="Texture" id=8]
 [ext_resource path="res://gfx/ladder.png" type="Texture" id=9]
 [ext_resource path="res://scripts/Ladder.gd" type="Script" id=10]
-[ext_resource path="res://scenes/food.tscn" type="PackedScene" id=11]
-[ext_resource path="res://gfx/green_beans.png" type="Texture" id=12]
-[ext_resource path="res://gfx/cake.png" type="Texture" id=13]
-[ext_resource path="res://gfx/pipe.png" type="Texture" id=14]
-[ext_resource path="res://gfx/pipe_mouth.png" type="Texture" id=15]
+[ext_resource path="res://scenes/food/green_beans.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/food/cake.tscn" type="PackedScene" id=12]
+[ext_resource path="res://gfx/pipe.png" type="Texture" id=13]
+[ext_resource path="res://gfx/pipe_mouth.png" type="Texture" id=14]
+[ext_resource path="res://scripts/FoodSpawner.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )
@@ -258,44 +258,46 @@ shape = SubResource( 11 )
 [node name="Food" type="Node" parent="."]
 
 [node name="Green Beans" parent="Food" instance=ExtResource( 11 )]
-position = Vector2( 24, 16 )
-texture = ExtResource( 12 )
-score = -5
+position = Vector2( 24, 8 )
 
-[node name="Cake" parent="Food" instance=ExtResource( 11 )]
+[node name="Cake" parent="Food" instance=ExtResource( 12 )]
 position = Vector2( 120, -480 )
-tasty = true
-texture = ExtResource( 13 )
-score = 10
 
 [node name="Pipes" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Pipe 1" type="Sprite" parent="Pipes"]
-editor/display_folded = true
 position = Vector2( 8, 0 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 14 )
+texture = ExtResource( 13 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 32 )
 
 [node name="Mouth" type="Sprite" parent="Pipes/Pipe 1"]
 position = Vector2( 0, 32 )
-texture = ExtResource( 15 )
+texture = ExtResource( 14 )
 centered = false
+
+[node name="FoodSpawner" type="Node2D" parent="Pipes/Pipe 1"]
+position = Vector2( 32, 8 )
+script = ExtResource( 15 )
+foods = [ ExtResource( 11 ), ExtResource( 12 ) ]
+
+[node name="Spawn Timer" type="Timer" parent="Pipes/Pipe 1/FoodSpawner"]
+wait_time = 2.0
+autostart = true
 
 [node name="Pipe 2" type="Sprite" parent="Pipes"]
 editor/display_folded = true
 position = Vector2( 104, 0 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 14 )
+texture = ExtResource( 13 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="Mouth" type="Sprite" parent="Pipes/Pipe 2"]
-texture = ExtResource( 15 )
+texture = ExtResource( 14 )
 centered = false
 
 [node name="Bounding Walls" type="StaticBody2D" parent="."]
@@ -327,3 +329,4 @@ disabled = true
 [connection signal="body_exited" from="Ladders/Ladder 2/OnLadderArea" to="Ladders/Ladder 2/OnLadderArea" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Ladders/Ladder 2/AboveLadderArea" to="Ladders/Ladder 2/AboveLadderArea" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Ladders/Ladder 2/AboveLadderArea" to="Ladders/Ladder 2/AboveLadderArea" method="_on_Area2D_body_exited"]
+[connection signal="timeout" from="Pipes/Pipe 1/FoodSpawner/Spawn Timer" to="Pipes/Pipe 1/FoodSpawner" method="_on_Spawn_Timer_timeout"]

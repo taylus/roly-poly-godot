@@ -2,11 +2,7 @@ extends KinematicBody2D
 class_name Food
 
 export var tasty: bool
-export var texture: Texture
 export var score: int
-
-func _ready() -> void:
-	if texture: get_node("Sprite").texture = texture
 
 func _physics_process(delta: float) -> void:
 	_fall_with_gravity()
