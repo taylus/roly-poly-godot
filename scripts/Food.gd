@@ -22,7 +22,7 @@ func _on_PlayerHitDetectionArea_area_entered(area: Area2D):
 	print("Food \"%s\" collided w/ %s \"%s\"" % [name, str(area), area.name])
 	if not area.is_in_group("player"): return
 	var player = _try_get_player_from(area)
-	if player: player.set_mood_for(Player.Mood.HAPPY if tasty else Player.Mood.SAD, 1.5)
+	if player: player.set_mood_for(Player.Mood.HAPPY if tasty else Player.Mood.SAD, 2.0)
 	# TODO: do additional stuff after eating the food:
 	#       * play sound based on food type
 	#       * adjust score based on food type

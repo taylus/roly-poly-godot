@@ -58,6 +58,7 @@ extents = Vector2( 88, 8 )
 [node name="Main" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 72, 234 )
 z_index = 1
 script = ExtResource( 1 )
@@ -83,6 +84,7 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Floors" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Base Floor" type="Sprite" parent="Floors"]
 editor/display_folded = true
@@ -168,13 +170,13 @@ position = Vector2( 22, 3 )
 shape = SubResource( 7 )
 
 [node name="Conveyor Belt 2" type="Sprite" parent="Conveyors"]
-editor/display_folded = true
 position = Vector2( 112, 72 )
 texture = ExtResource( 6 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 32, 16 )
 script = ExtResource( 7 )
+movementVector = Vector2( -4, 0 )
 
 [node name="End Cap" type="Sprite" parent="Conveyors/Conveyor Belt 2"]
 position = Vector2( 0, 16 )
@@ -186,7 +188,20 @@ centered = false
 wait_time = 0.5
 autostart = true
 
+[node name="ConveyorStaticBody" type="StaticBody2D" parent="Conveyors/Conveyor Belt 2"]
+position = Vector2( 10, 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyors/Conveyor Belt 2/ConveyorStaticBody"]
+shape = SubResource( 6 )
+
+[node name="PushArea" type="Area2D" parent="Conveyors/Conveyor Belt 2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyors/Conveyor Belt 2/PushArea"]
+position = Vector2( 10, 3 )
+shape = SubResource( 7 )
+
 [node name="Ladders" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Ladder 1" type="Sprite" parent="Ladders"]
 position = Vector2( 0, 192 )
@@ -248,12 +263,13 @@ texture = ExtResource( 12 )
 score = -5
 
 [node name="Cake" parent="Food" instance=ExtResource( 11 )]
-position = Vector2( 120, 0 )
+position = Vector2( 120, -480 )
 tasty = true
 texture = ExtResource( 13 )
 score = 10
 
 [node name="Pipes" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Pipe 1" type="Sprite" parent="Pipes"]
 editor/display_folded = true
@@ -283,7 +299,6 @@ texture = ExtResource( 15 )
 centered = false
 
 [node name="Bounding Walls" type="StaticBody2D" parent="."]
-editor/display_folded = true
 
 [node name="Left Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( -8, 128 )
@@ -296,11 +311,14 @@ shape = SubResource( 14 )
 [node name="Top Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( 72, -8 )
 shape = SubResource( 15 )
+disabled = true
 [connection signal="timeout" from="Player/Sprite/Idle Animation Timer" to="Player/Sprite" method="_on_Idle_Animation_Timer_timeout"]
 [connection signal="timeout" from="Conveyors/Conveyor Belt 1/Animation Timer" to="Conveyors/Conveyor Belt 1" method="_on_Animation_Timer_timeout"]
 [connection signal="body_entered" from="Conveyors/Conveyor Belt 1/PushArea" to="Conveyors/Conveyor Belt 1" method="_on_PushArea_body_entered"]
 [connection signal="body_exited" from="Conveyors/Conveyor Belt 1/PushArea" to="Conveyors/Conveyor Belt 1" method="_on_PushArea_body_exited"]
 [connection signal="timeout" from="Conveyors/Conveyor Belt 2/Animation Timer" to="Conveyors/Conveyor Belt 2" method="_on_Animation_Timer_timeout"]
+[connection signal="body_entered" from="Conveyors/Conveyor Belt 2/PushArea" to="Conveyors/Conveyor Belt 2" method="_on_PushArea_body_entered"]
+[connection signal="body_exited" from="Conveyors/Conveyor Belt 2/PushArea" to="Conveyors/Conveyor Belt 2" method="_on_PushArea_body_exited"]
 [connection signal="body_entered" from="Ladders/Ladder 1/OnLadderArea" to="Ladders/Ladder 1/OnLadderArea" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Ladders/Ladder 1/OnLadderArea" to="Ladders/Ladder 1/OnLadderArea" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Ladders/Ladder 1/AboveLadderArea" to="Ladders/Ladder 1/AboveLadderArea" method="_on_Area2D_body_entered"]

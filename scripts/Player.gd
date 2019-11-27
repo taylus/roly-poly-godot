@@ -31,12 +31,11 @@ func set_mood(mood: String) -> void:
 	currentMood = mood
 	_update_texture_based_on_mood()
 	
-# sets the current mood for duration seconds, then returns to the previous mood
+# set the current mood for duration seconds, then return to neutral
 func set_mood_for(mood: String, duration: float) -> void:
-	var oldMood = currentMood
 	set_mood(mood)
 	yield(get_tree().create_timer(duration), "timeout")
-	set_mood(oldMood)
+	set_mood(Mood.NEUTRAL)
 
 func _on_Idle_Animation_Timer_timeout() -> void:
 	currentIdleFrame = 1 if currentIdleFrame == 0 else 0
