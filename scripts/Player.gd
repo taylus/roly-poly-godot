@@ -9,6 +9,7 @@ const Mood = {
 
 var currentMood: String = Mood.NEUTRAL
 var currentIdleFrame: int = 0
+var moodResetTimer: Timer = Timer.new()
 
 var idle_frames = {
 	"neutral": [
@@ -27,6 +28,9 @@ var idle_frames = {
 
 onready var idle_anim_timer: Timer = $"Idle Animation Timer"
 
+func _ready() -> void:
+	add_child(moodResetTimer)
+
 func set_mood(mood: String) -> void:
 	#print("Setting player mood to \"%s\"" % mood)
 	currentMood = mood
@@ -35,7 +39,8 @@ func set_mood(mood: String) -> void:
 # set the current mood for duration seconds, then return to neutral
 func set_mood_for(mood: String, duration: float) -> void:
 	set_mood(mood)
-	yield(get_tree().create_timer(duration), "timeout")
+	moodResetTimer.start(duration)
+	yield(moodResetTimer, "timeout")
 	set_mood(Mood.NEUTRAL)
 
 func _on_Idle_Animation_Timer_timeout() -> void:
