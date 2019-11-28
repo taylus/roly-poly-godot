@@ -139,6 +139,7 @@ position = Vector2( 24, 8 )
 shape = SubResource( 5 )
 
 [node name="Conveyors" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Conveyor Belt 1" type="Sprite" parent="Conveyors"]
 position = Vector2( 0, 144 )
@@ -297,7 +298,6 @@ script = ExtResource( 13 )
 foods = [ ExtResource( 15 ) ]
 
 [node name="Spawn Timer" type="Timer" parent="Pipes/Pipe 2/FoodSpawner"]
-wait_time = 7.0
 autostart = true
 
 [node name="Bounding Walls" type="StaticBody2D" parent="."]
