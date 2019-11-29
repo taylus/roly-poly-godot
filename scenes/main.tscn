@@ -277,7 +277,7 @@ script = ExtResource( 13 )
 foods = [ ExtResource( 14 ) ]
 
 [node name="Spawn Timer" type="Timer" parent="Pipes/Pipe 1/FoodSpawner"]
-wait_time = 7.0
+wait_time = 0.01
 autostart = true
 
 [node name="Pipe 2" type="Sprite" parent="Pipes"]
@@ -293,7 +293,7 @@ texture = ExtResource( 12 )
 centered = false
 
 [node name="FoodSpawner" type="Node2D" parent="Pipes/Pipe 2"]
-position = Vector2( 8, -240 )
+position = Vector2( 8, 8 )
 script = ExtResource( 13 )
 foods = [ ExtResource( 15 ) ]
 

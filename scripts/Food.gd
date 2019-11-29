@@ -28,5 +28,19 @@ func _on_PlayerHitDetectionArea_area_entered(area: Area2D):
 	#       * adjust score based on food type
 	queue_free()
 	
-func _try_get_player_from(area: Area2D) -> Node:
-	return area.get_parent().find_node("Sprite")
+func _try_get_player_from(area: Area2D) -> Player:
+	return area.get_parent().find_node("Sprite") as Player
+
+func _on_ExpireTimer_timeout() -> void:
+	var blink_duration = 4.0
+	_blink_sprite(blink_duration)
+	yield(get_tree().create_timer(blink_duration),"timeout")
+	emit_signal("expired")
+	queue_free()
+	
+func _blink_sprite(duration: float, blinks: int = 4) -> void:
+	for i in range(blinks):
+		modulate.a = 0
+		yield(get_tree().create_timer(duration / blinks / 2),"timeout")
+		modulate.a = 1
+		yield(get_tree().create_timer(duration / blinks / 2),"timeout")
