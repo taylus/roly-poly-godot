@@ -4,7 +4,8 @@ class_name Player
 const Mood = {
 	NEUTRAL = "neutral",
 	HAPPY = "happy",
-	SAD = "sad"	
+	SAD = "sad",
+	HUNGRY = "hungry"
 }
 
 var currentMood: String = Mood.NEUTRAL
@@ -23,6 +24,10 @@ var idle_frames = {
 	"sad": [
 		preload("res://gfx/slime_idle_sad_1.png"),
 		preload("res://gfx/slime_idle_sad_2.png")
+	],
+	"hungry": [
+		preload("res://gfx/slime_look_up_1.png"),
+		preload("res://gfx/slime_look_up_2.png")
 	]
 }
 
@@ -69,3 +74,5 @@ func _input(event: InputEvent) -> void:
 		set_mood(Mood.NEUTRAL)
 	if event.scancode == KEY_C:
 		set_mood_for(Mood.SAD, 1.5)
+	if event.scancode == KEY_Q:
+		set_mood_for(Mood.HUNGRY, 1.5)
