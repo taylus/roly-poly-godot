@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Food
 
-signal eaten_by(player)
+signal eaten(food)
 signal expired()
 
 export var tasty: bool
@@ -22,7 +22,7 @@ func _on_PlayerHitDetectionArea_area_entered(area: Area2D):
 	if not area.is_in_group("player"): return
 	var player = _try_get_player_from(area)
 	if player: player.set_mood_for(Player.Mood.HAPPY if tasty else Player.Mood.SAD, 2.0)
-	emit_signal("eaten_by", player)
+	emit_signal("eaten", self)
 	# TODO: do additional stuff after eating the food:
 	#       * play sound based on food type
 	#       * adjust score based on food type

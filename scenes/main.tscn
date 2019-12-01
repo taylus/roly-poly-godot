@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://gfx/slime_idle_neutral_1.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://scenes/food/ice_cream.tscn" type="PackedScene" id=18]
 [ext_resource path="res://scenes/food/ice_cream_bar.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scenes/food/candy.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/hunger_meter.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )
@@ -306,6 +307,7 @@ foods = [ ExtResource( 15 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 
 autostart = true
 
 [node name="Bounding Walls" type="StaticBody2D" parent="."]
+editor/display_folded = true
 
 [node name="Left Wall" type="CollisionShape2D" parent="Bounding Walls"]
 position = Vector2( -8, 128 )
@@ -319,6 +321,10 @@ shape = SubResource( 12 )
 position = Vector2( 72, -8 )
 shape = SubResource( 13 )
 disabled = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HungerMeter" parent="UI" instance=ExtResource( 21 )]
 [connection signal="timeout" from="Player/Sprite/Idle Animation Timer" to="Player/Sprite" method="_on_Idle_Animation_Timer_timeout"]
 [connection signal="timeout" from="Conveyors/Conveyor Belt 1/Animation Timer" to="Conveyors/Conveyor Belt 1" method="_on_Animation_Timer_timeout"]
 [connection signal="body_entered" from="Conveyors/Conveyor Belt 1/PushArea" to="Conveyors/Conveyor Belt 1" method="_on_PushArea_body_entered"]

@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/FoodSpawner.gd"
 }, {
+"base": "TextureProgress",
+"class": "HungerMeter",
+"language": "GDScript",
+"path": "res://scripts/HungerMeter.gd"
+}, {
 "base": "Sprite",
 "class": "Player",
 "language": "GDScript",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "ConveyorBelt": "",
 "Food": "",
 "FoodSpawner": "",
+"HungerMeter": "",
 "Player": "",
 "PlayerBody2D": ""
 }

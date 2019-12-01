@@ -3,7 +3,8 @@ class_name FoodSpawner
 
 export(Array, PackedScene) var foods
 
-onready var food_spawn_timer = $"Spawn Timer"
+onready var food_spawn_timer = get_node("Spawn Timer")
+onready var hunger_meter = get_node("/root/Main/UI/HungerMeter")
 
 func _ready() -> void:
 	randomize()
@@ -26,10 +27,12 @@ func _spawn_random_food() -> void:
 func _configure(food: Food) -> void:
 	food.scale = Vector2(0.5, 0.5)  		  # why are the sprites too big w/o this?
 	food.get_node("Sprite").z_index = -1   # draw food behind pipes
-	food.connect("eaten_by", self, "_on_food_eaten_by")
+	food.connect("eaten", self, "_on_food_eaten")
 	food.connect("expired", self, "_on_food_expired")
+	if hunger_meter != null:
+		food.connect("eaten", hunger_meter, "_on_food_eaten")
 	
-func _on_food_eaten_by(player: Player) -> void:
+func _on_food_eaten(food: Food) -> void:
 	food_spawn_timer.paused = false
 	
 func _on_food_expired() -> void:
