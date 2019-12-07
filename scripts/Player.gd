@@ -69,3 +69,6 @@ func _input(event: InputEvent) -> void:
 		set_mood(Mood.NEUTRAL)
 	if event.scancode == KEY_C:
 		set_mood_for(Mood.SAD, 1.5)
+		
+	if event.scancode == KEY_R:
+		get_tree().reload_current_scene()
