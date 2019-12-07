@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ConveyorBelt.gd"
 }, {
+"base": "Node",
+"class": "Debug",
+"language": "GDScript",
+"path": "res://scripts/Debug.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Food",
 "language": "GDScript",
@@ -41,6 +46,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ConveyorBelt": "",
+"Debug": "",
 "Food": "",
 "FoodSpawner": "",
 "HungerMeter": "",
@@ -53,6 +59,10 @@ _global_script_class_icons={
 config/name="Roly Poly"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Debug="*res://scripts/Debug.gd"
 
 [display]
 

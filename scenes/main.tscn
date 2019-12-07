@@ -64,7 +64,6 @@ extents = Vector2( 88, 8 )
 [node name="Main" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 72, 234 )
 z_index = 1
 script = ExtResource( 1 )

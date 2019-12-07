@@ -53,22 +53,3 @@ func _update_texture_based_on_mood() -> void:
 	
 	if currentIdleFrame > frames.size() - 1: return
 	texture = frames[currentIdleFrame]
-
-func _process(delta: float) -> void:
-	if Input.is_action_pressed("ui_cancel"):
-		get_tree().quit()
-		
-func _input(event: InputEvent) -> void:
-	if not event is InputEventKey: return
-	if not event.is_pressed(): return
-	if event.is_echo(): return
-	
-	if event.scancode == KEY_Z:
-		set_mood_for(Mood.HAPPY, 1.5)
-	if event.scancode == KEY_X:
-		set_mood(Mood.NEUTRAL)
-	if event.scancode == KEY_C:
-		set_mood_for(Mood.SAD, 1.5)
-		
-	if event.scancode == KEY_R:
-		get_tree().reload_current_scene()
