@@ -8,6 +8,7 @@ var above_ladder: bool = false
 onready var sprite: Sprite = get_node("Sprite")
 
 func _physics_process(delta: float) -> void:
+	if GameState.paused: return
 	var movement = Vector2()
 	
 	if Input.is_action_pressed("ui_left"):

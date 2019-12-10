@@ -11,6 +11,7 @@ func _ready() -> void:
 	_spawn_random_food()
 
 func _on_Spawn_Timer_timeout() -> void:
+	if GameState.paused: return
 	_spawn_random_food()
 
 func _spawn_random_food() -> void:

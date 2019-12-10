@@ -32,6 +32,7 @@ func _try_get_player_from(area: Area2D) -> Player:
 	return area.get_parent().find_node("Sprite") as Player
 
 func _on_ExpireTimer_timeout() -> void:
+	if GameState.paused: return
 	var blink_duration = 4.0
 	_blink_sprite(blink_duration)
 	yield(get_tree().create_timer(blink_duration),"timeout")

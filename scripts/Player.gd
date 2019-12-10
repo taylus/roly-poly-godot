@@ -44,6 +44,7 @@ func set_mood_for(mood: String, duration: float) -> void:
 	set_mood(Mood.NEUTRAL)
 
 func _on_Idle_Animation_Timer_timeout() -> void:
+	if GameState.paused: return
 	currentIdleFrame = 1 if currentIdleFrame == 0 else 0
 	_update_texture_based_on_mood()
 	
