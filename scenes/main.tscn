@@ -324,6 +324,7 @@ disabled = true
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HungerMeter" parent="UI" instance=ExtResource( 21 )]
+
 [connection signal="timeout" from="Player/Sprite/Idle Animation Timer" to="Player/Sprite" method="_on_Idle_Animation_Timer_timeout"]
 [connection signal="timeout" from="Conveyors/Conveyor Belt 1/Animation Timer" to="Conveyors/Conveyor Belt 1" method="_on_Animation_Timer_timeout"]
 [connection signal="body_entered" from="Conveyors/Conveyor Belt 1/PushArea" to="Conveyors/Conveyor Belt 1" method="_on_PushArea_body_entered"]
