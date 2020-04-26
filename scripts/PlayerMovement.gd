@@ -2,7 +2,7 @@ extends KinematicBody2D
 class_name PlayerBody2D
 
 const walk_speed = 80;
-const jump_height = -200;
+const jump_height = -220;
 const gravity = 20;
 var on_ladder: bool = false
 var above_ladder: bool = false
@@ -11,7 +11,7 @@ onready var sprite: Sprite = get_node("Sprite")
 
 func _physics_process(delta: float) -> void:
 	if GameState.paused: return
-	movement.y += gravity
+	if not on_ladder: movement.y += gravity
 	
 	if Input.is_action_pressed("ui_left"):
 		movement.x = -walk_speed
@@ -28,6 +28,8 @@ func _physics_process(delta: float) -> void:
 		movement.y = jump_height
 	elif Input.is_action_pressed("ui_down") and (on_ladder or above_ladder):
 		movement.y = walk_speed
+	elif on_ladder:
+		movement.y = 0
 		
 	movement = _move(movement)
 		
