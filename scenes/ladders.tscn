@@ -32,7 +32,7 @@ extents = Vector2( 8, 7 )
 extents = Vector2( 72, 8 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 24, 8 )
+extents = Vector2( 32, 8 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 24, 8 )
@@ -64,6 +64,7 @@ extents = Vector2( 88, 8 )
 [node name="Main" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 72, 234 )
 z_index = 1
 script = ExtResource( 1 )
@@ -262,6 +263,7 @@ script = ExtResource( 10 )
 shape = SubResource( 11 )
 
 [node name="Pipes" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Pipe 1" type="Sprite" parent="Pipes"]
 position = Vector2( 8, 0 )
@@ -322,6 +324,7 @@ shape = SubResource( 13 )
 disabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="HungerMeter" parent="UI" instance=ExtResource( 21 )]
 
