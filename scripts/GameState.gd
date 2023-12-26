@@ -2,7 +2,7 @@ extends Node
 
 var paused: bool = false
 
-onready var player: Player = get_node("/root/Main/Player/Sprite") as Player
+@onready var player: Player = get_node("/root/Main/Player/Sprite2D") as Player
 
 func _on_player_won() -> void:
 	print("You won!") # TODO: fancy screen/sound effects

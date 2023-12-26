@@ -8,3 +8,6 @@ export_presets.cfg
 
 # exported binaries
 export/
+
+# Godot 4+ specific ignores
+.godot/

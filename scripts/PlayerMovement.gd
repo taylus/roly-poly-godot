@@ -1,11 +1,11 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name PlayerBody2D
 
 const walk_speed = 50;
 const gravity = Vector2(0, 100);
 var on_ladder: bool = false
 var above_ladder: bool = false
-onready var sprite: Sprite = get_node("Sprite")
+@onready var sprite: Sprite2D = get_node("Sprite2D")
 
 func _physics_process(delta: float) -> void:
 	if GameState.paused: return
@@ -27,4 +27,6 @@ func _physics_process(delta: float) -> void:
 	_move(movement)
 		
 func _move(vector: Vector2) -> void:
-	move_and_slide(vector, Vector2.UP)	# platformer, so Vector2.UP is the floor normal
+	set_velocity(vector)
+	set_up_direction(Vector2.UP)
+	move_and_slide()	# platformer, so Vector2.UP is the floor normal

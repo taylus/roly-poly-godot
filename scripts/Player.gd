@@ -1,4 +1,4 @@
-extends Sprite
+extends Sprite2D
 class_name Player
 
 const Mood = {
@@ -26,7 +26,7 @@ var idle_frames = {
 	]
 }
 
-onready var idle_anim_timer: Timer = $"Idle Animation Timer"
+@onready var idle_anim_timer: Timer = $"Idle Animation Timer"
 
 func _ready() -> void:
 	add_child(moodResetTimer)
@@ -40,7 +40,7 @@ func set_mood(mood: String) -> void:
 func set_mood_for(mood: String, duration: float) -> void:
 	set_mood(mood)
 	moodResetTimer.start(duration)
-	yield(moodResetTimer, "timeout")
+	await moodResetTimer.timeout
 	set_mood(Mood.NEUTRAL)
 
 func _on_Idle_Animation_Timer_timeout() -> void:

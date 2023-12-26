@@ -1,4 +1,4 @@
-extends Sprite
+extends Sprite2D
 class_name ConveyorBelt
 
 var frames = [
@@ -11,10 +11,10 @@ var endCapFrames = [
 	preload("res://gfx/conveyor_belt_end_rotated.png")
 ]
 
-onready var endCap = $"End Cap"
+@onready var endCap = $"End Cap"
 
 var bodiesToMove = []
-export var movementVector: Vector2 = Vector2(4, 0)
+@export var movementVector: Vector2 = Vector2(4, 0)
 
 func _on_Animation_Timer_timeout():
 	texture = frames[1] if texture == frames[0] else frames[0]
@@ -29,9 +29,9 @@ func _on_Animation_Timer_timeout():
 func _on_PushArea_body_entered(body: PhysicsBody2D):
 	if body is StaticBody2D: return
 	#print("Conveyor push area entered by %s \"%s\"" % [str(body), body.name])
-	if body is KinematicBody2D: bodiesToMove.append(body)
+	if body is CharacterBody2D: bodiesToMove.append(body)
 
 func _on_PushArea_body_exited(body):
 	if body is StaticBody2D: return
 	#print("Conveyor push area exited by %s \"%s\"" % [str(body), body.name])
-	if body is KinematicBody2D: bodiesToMove.erase(body)
+	if body is CharacterBody2D: bodiesToMove.erase(body)

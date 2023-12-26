@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cqkvbhvdxba63"]
 
-[ext_resource path="res://gfx/hunger_meter_2.png" type="Texture" id=1]
-[ext_resource path="res://gfx/hunger_meter_2_filled.png" type="Texture" id=2]
-[ext_resource path="res://scripts/HungerMeter.gd" type="Script" id=3]
+[ext_resource type="Texture2D" uid="uid://gbchocau7l3k" path="res://gfx/hunger_meter_2.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://2rotsv4sjw4w" path="res://gfx/hunger_meter_2_filled.png" id="2"]
+[ext_resource type="Script" path="res://scripts/HungerMeter.gd" id="3"]
 
-[node name="HungerMeter" type="TextureProgress"]
-margin_right = 8.0
-margin_bottom = 64.0
+[node name="HungerMeter" type="TextureProgressBar"]
+offset_right = 8.0
+offset_bottom = 64.0
 value = 12.0
-texture_under = ExtResource( 1 )
-texture_progress = ExtResource( 2 )
 fill_mode = 3
 nine_patch_stretch = true
 stretch_margin_left = 4
 stretch_margin_top = 16
 stretch_margin_right = 4
 stretch_margin_bottom = 16
-script = ExtResource( 3 )
+texture_under = ExtResource("1")
+texture_progress = ExtResource("2")
+script = ExtResource("3")
